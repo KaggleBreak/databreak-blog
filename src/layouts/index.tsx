@@ -12,7 +12,7 @@ interface IndexProps {
 }
 
 const GlobalStyles = css`
-  @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+  @import url('https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700&subset=korean');
   html,
   body,
   div,
@@ -124,7 +124,7 @@ const GlobalStyles = css`
   }
   html {
     box-sizing: border-box;
-    font-family: "Nanum Gothic", sans-serif;
+    font-family: 'Nanum Gothic', sans-serif;
 
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
@@ -183,7 +183,7 @@ const GlobalStyles = css`
   kbd,
   pre,
   samp {
-    font-family: "Nanum Gothic", monospace, monospace;
+    font-family: 'Nanum Gothic', monospace, monospace;
     font-size: 1em;
   }
   button,
@@ -270,7 +270,7 @@ const GlobalStyles = css`
   body {
     overflow-x: hidden;
     color: ${darken('0.25', colors.midgrey)};
-    font-family: "Nanum Gothic", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+    font-family: 'Nanum Gothic', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
       'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 1.5rem;
     line-height: 1.6em;

@@ -136,10 +136,10 @@ const SubscribeOverlayTitle = styled.h1`
 `;
 
 const SubscribeOverlayDescription = styled.p`
-  @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+  @import url('https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700&subset=korean');
   margin: 0 auto 50px;
   max-width: 650px;
-  font-family: "Nanum Gothic", Georgia, serif;
+  font-family: 'Nanum Gothic', Georgia, serif;
   font-size: 3rem;
   line-height: 1.3em;
   font-weight: 300;
