@@ -1,0 +1,12 @@
+- id: speeches
+  description: Some of the greatest words ever spoken.
+  image: img/computer.jpg
+- id: MachineLearning
+  description: About machine learning related articles.
+  image: img/computer.jpg
+- id: NLP
+  description: About Natural Language Processing related articles.
+  image: img/computer.jpg
+- id: FeatureSelection
+  description: About Feature selection related articles.
+  image: img/computer.jpg

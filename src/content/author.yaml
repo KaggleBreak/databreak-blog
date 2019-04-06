@@ -1,0 +1,36 @@
+- id: Ghost
+  avatar: avatars/ghost.png
+  bio: The professional publishing platform
+  twitter: TryGhost
+  facebook: ghost
+  website: https://ghost.org/
+  location: On a plane
+- id: Another Author
+  avatar: avatars/ghost.png
+  bio: This is another test author with a profile background image
+  twitter: TryGhost
+  facebook: ghost
+  website: https://ghost.org/
+  location: On a plane
+  profile_image: img/computer.jpg
+- id: syleeie
+  avatar: img/syleeie/syleeie.PNG
+  bio: 매칭 + 추천 데이터 분석가
+  facebook: https://web.facebook.com/syleeie
+- id: Gyuwon_Cho
+  avatar: img/Gyuwon_Cho/Gyuwon_Cho.jpg
+  bio: 고려대학교 산업경영공학부 석사과정
+  facebook: https://web.facebook.com/gyuwonable
+- id: choco9966
+  avatar: img/choco9966/lulu.jpg
+  bio: 한양대학교 산업경영공학부 학부과정
+  facebook: https://web.facebook.com/profile.php?id=100004072952571
+- id: RyanYS
+  avatar: img/RyanYS/Yeongseung.jpg
+  bio: 실시간 예측 서비스
+  facebook: https://www.facebook.com/yeongseung.Ryan.jo
+- id: inahjeon
+  avatar: img/inahjeon/inahjeon.jpg
+  bio: Data Scientist @ Rainist
+  facebook: inahjeon5324
+  website: https://inahjeon.github.io
