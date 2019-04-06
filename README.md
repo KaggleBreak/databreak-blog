@@ -1,4 +1,4 @@
-# databreak-blog [![Netlify Status](https://api.netlify.com/api/v1/badges/152d2680-84d3-4401-ad1e-fe39d4d046f2/deploy-status)](https://app.netlify.com/sites/databreak/deploys)
+# databreak-blog [![Netlify Status](https://api.netlify.com/api/v1/badges/c75e8490-455e-47d7-9c32-c91da87a9661/deploy-status)](https://app.netlify.com/sites/databreak-blog/deploys)
 
 This is a static blog generator gatsby repo. A port of [Casper](https://github.com/TryGhost/Casper) v2 a theme from [Ghost](https://ghost.org/) for [GatsbyJS](https://www.gatsbyjs.org/) using [TypeScript](https://www.typescriptlang.org/).
 

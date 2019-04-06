@@ -79,7 +79,7 @@ const PostCardTitle = styled.h2`
 `;
 
 const PostCardExcerpt = styled.section`
-  font-family: nanumgothic, Georgia, serif;
+  font-family: "Nanum Gothic", Georgia, serif;
 `;
 
 const PostCardMeta = styled.footer`

@@ -139,7 +139,7 @@ const SubscribeOverlayDescription = styled.p`
   @import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
   margin: 0 auto 50px;
   max-width: 650px;
-  font-family: nanumgothic, Georgia, serif;
+  font-family: "Nanum Gothic", Georgia, serif;
   font-size: 3rem;
   line-height: 1.3em;
   font-weight: 300;
