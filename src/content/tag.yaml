@@ -13,3 +13,6 @@
 - id: Bayesian
   description: About Bayesian related articles.
   image: img/computer.jpg
+- id: Optimzation
+  description: About Optimzation related articles.
+  image: img/computer.jpg
