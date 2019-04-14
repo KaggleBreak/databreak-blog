@@ -10,3 +10,6 @@
 - id: FeatureSelection
   description: About Feature selection related articles.
   image: img/computer.jpg
+- id: Bayesian
+  description: About Bayesian related articles.
+  image: img/computer.jpg
