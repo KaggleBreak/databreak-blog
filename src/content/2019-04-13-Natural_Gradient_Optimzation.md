@@ -1,8 +1,8 @@
 ---
 layout: post
 title: "It’s Only Natural: An Excessively Deep Dive Into Natural Gradient Optimization(KR)"
-image: img/Youngpyoryu/Image Credit.Jpeg
-author: Youngpyo
+image: img/youngpyoryu/Image Credit.jpeg
+author: youngpyoryu
 date: "2019-04-14T15:46:37.121Z"
 tags: 
   - Optimization
