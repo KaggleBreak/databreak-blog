@@ -303,7 +303,7 @@ fig.subplots_adjust(top=0.93)
 ```
 ![](https://github.com/KaggleBreak/databreak-blog/blob/master/src/content/img/choco9966/Nullimportance/p11.PNG)
 
-## 다른 임계 값에 따라 변수를 제거하고 점수 측정
+## 다른 임계 값들에 따라 변수를 제거하고 점수 측정
 ```
 def score_feature_selection(df=None, train_features=None, cat_feats=None, target=None):
     # Lightgbm을 학습합니다. 
