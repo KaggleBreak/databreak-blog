@@ -8,6 +8,10 @@ tags:
   - MachineLearning 
 ---
 
+
+
+아래의 글은 Olivier의 [feature selection with null importances](https://www.kaggle.com/ogrellier/feature-selection-with-null-importances)를 번역한 글입니다.
+
 장점 
 - 변수들끼리의 상호작용 중요성을 없애지 않음. 
 - 높은 분산을 가지거나 목적변수와 연관이 없는 변수들을 쉽게 찾을 수 있음. 
@@ -35,7 +39,7 @@ Notebook의 시행 과정:
     
 데이터의 전처리 시간상의 이유로, 커널에서는 application_train.csv만을 다룹니다. 하지만 너는 이것을 확장해서 사용하기를 바랍니다. (옮긴 이 : Home Credit Default Risk 대회에서는 총 6개의 data set이 주어지고 FE 과정까지 거치면 1,000개가 넘는 변수가 생겼습니다. 변수가 너무 많은 문제 때문에 **변수 제거** 방법에 대한 논의가 많이 이루어졌고, 이 대회에서 사람들이 많이 사용했던 방법이 Null importance 방법입니다. )
 
-### 패키지 로드 
+### 패키지 불러오기 
 
 ```
 import pandas as pd
@@ -80,7 +84,7 @@ for f_ in categorical_feats:
 data.head()
 ```
 
-![]()
+![](https://drive.google.com/file/d/1hYXwo-tUgx6jmT_QXMwDVvloUmD9fvPF/view)
 
 ### 평가 함수 만들기
 LightGBM의 random forest boosting을 사용하여 평가함수를 만들어줍니다. 
@@ -137,7 +141,7 @@ np.random.seed(123)
 actual_imp_df = get_feature_importances(data=data, shuffle=False)
 actual_imp_df.head()
 ```
-![](p2.PNG)
+![](https://drive.google.com/file/d/1yQPpZlmi0RTWfvdnd4G8T5u3QclzaS-Q/view)
 
 ### Null Importances 분포 만들기 
 ```
@@ -161,13 +165,13 @@ for i in range(nb_runs):
     print(dsp, end=``, flush=True)
 ```
 
-![](p3.PNG)
+![](https://drive.google.com/open?id=1ilSUy0Ztv73e4GkqBNcIRWug6wfJ3vjn)
 
 ```
 null_imp_df.head()
 ```
 
-![](p4.PNG)
+![](https://drive.google.com/open?id=18DPzh5VLMD5g57L0n3bLhLnt55IvAfEv)
 
 ### 분포의 예시 
 몇 개의 그림은 글보다 훨씬 이해하기 쉽습니다. 
@@ -197,23 +201,23 @@ def display_distributions(actual_imp_df_, null_imp_df_, feature_):
 ```
 display_distributions(actual_imp_df_=actual_imp_df, null_imp_df_=null_imp_df, feature_=`LIVINGAPARTMENTS_AVG`)
 ```
-![](p5.PNG)
+![](https://drive.google.com/open?id=1Iiqi-v-cw8_BrMClXW7huzqWhcKTvKc3)
 ```
 display_distributions(actual_imp_df_=actual_imp_df, null_imp_df_=null_imp_df, feature_=`CODE_GENDER`)
 ```
-![](p6.PNG)
+![](https://drive.google.com/open?id=1gokoH-bW1N54b0Enir1l-MHHRJ_uTwon)
 ```
 display_distributions(actual_imp_df_=actual_imp_df, null_imp_df_=null_imp_df, feature_=`EXT_SOURCE_1`)
 ```
-![](p7.PNG)
+![](https://drive.google.com/open?id=1B-C7t9RKiJNDu2EBXssGTMks-54X75oC)
 ```
 display_distributions(actual_imp_df_=actual_imp_df, null_imp_df_=null_imp_df, feature_=`EXT_SOURCE_2`)
 ```
-![](p8.PNG)
+![](https://drive.google.com/open?id=1CXOYHDnPQuu_PA4ifkabzZWuPCuvyYF9)
 ```
 display_distributions(actual_imp_df_=actual_imp_df, null_imp_df_=null_imp_df, feature_=`EXT_SOURCE_3`)
 ```
-![](p9.PNG)
+![](https://drive.google.com/open?id=1iVI8mAMFrdFxLbt5ORPvmUXXF1id7gIp)
 
 위의 그림에서 Null Importance 방법의 장점이 보입니다. 특히 잘 알려진 사실은 다음과 같습니다.
 
@@ -258,7 +262,7 @@ sns.barplot(x=`gain_score`, y=`feature`, data=scores_df.sort_values(`gain_score`
 ax.set_title(`Feature scores wrt gain importances`, fontweight=`bold`, fontsize=14)
 plt.tight_layout()
 ```
-![](p10.PNG)
+![](https://drive.google.com/open?id=1FWhO4EAcVUxA9cFtNue_5avfhUhjsJvv)
 
 ### 결과 데이터 저장 
 
@@ -297,7 +301,7 @@ plt.tight_layout()
 plt.suptitle("Features` split and gain scores", fontweight=`bold`, fontsize=16)
 fig.subplots_adjust(top=0.93)
 ```
-![](p11.PNG)
+![](https://drive.google.com/open?id=1bQTbORZK6uPDEGe6NxEnB7iNMVqwMeMz)
 
 ### 다른 임계 값에 따라 변수를 제거하고 점수 측정
 ```
@@ -348,5 +352,10 @@ for threshold in [0, 10, 20, 30 , 40, 50 ,60 , 70, 80 , 90, 95, 99]:
     gain_results = score_feature_selection(df=data, train_features=gain_feats, cat_feats=gain_cat_feats, target=data[`TARGET`])
     print(`\t GAIN  : %.6f +/- %.6f` % (gain_results[0], gain_results[1]))
 ```
-![](p12.PNG)
+![](https://drive.google.com/open?id=195JF_w_iKhv6VbZn_x5UWjTeFAC9Azj1)
 
+출처 
+- https://www.kaggle.com/ogrellier/feature-selection-with-null-importances
+
+Jupyter notebook 파일
+- https://drive.google.com/open?id=1Y_dBs9rlIfdBh8pHI05NW1b6fC2QmNyU
