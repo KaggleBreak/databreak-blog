@@ -3,9 +3,9 @@ layout: post
 title: "Feature Selection with Null Importances(KR)"
 image: img/choco9966/nullimportance.PNG
 author: choco9966
-date: "2019-04-21T15:46:37.121Z"
-tags: 
-  - MachineLearning 
+date: "2019-04-20T15:46:37.121Z"
+tags:
+  - FeatureSelection
 ---
 
 # Feature selection using target permutation (Null Importance)
