@@ -8,8 +8,7 @@ tags:
   - MachineLearning 
 ---
 
-
-
+# Feature selection using target permutation (Null Importance)
 아래의 글은 Olivier의 [feature selection with null importances](https://www.kaggle.com/ogrellier/feature-selection-with-null-importances)를 번역한 글입니다.
 
 장점 
@@ -22,7 +21,6 @@ tags:
 원문 링크 
 - https://www.kaggle.com/ogrellier/feature-selection-with-null-importances
 
-## Feature selection using target permutation (Null Importance)
 이 Notebook 파일은 다음의 [논문](https://academic.oup.com/bioinformatics/article/26/10/1340/193348) 를 토대로 만든 자료입니다. kaggle의 [Home Credit Default Risk](https://www.kaggle.com/c/home-credit-default-risk) 라는 대회에서 변수 제거를 하기 위해 만들어진 [커널](https://www.kaggle.com/ogrellier/feature-selection-with-null-importances) 입니다.  
 
 #### Null Importance Feature Selection은 실제 변수의 중요도와 임의로 셔플된 목적변수의 변수중요도의 분포를 비교하는 방법입니다.
