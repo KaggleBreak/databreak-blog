@@ -84,7 +84,7 @@ for f_ in categorical_feats:
 data.head()
 ```
 
-![](https://drive.google.com/file/d/1hYXwo-tUgx6jmT_QXMwDVvloUmD9fvPF/view)
+![](https://github.com/KaggleBreak/databreak-blog/blob/master/src/content/img/choco9966/Nullimportance/p1.PNG)
 
 ### 평가 함수 만들기
 LightGBM의 random forest boosting을 사용하여 평가함수를 만들어줍니다. 
