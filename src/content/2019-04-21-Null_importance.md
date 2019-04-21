@@ -22,7 +22,7 @@ tags:
 원문 링크 
 - https://www.kaggle.com/ogrellier/feature-selection-with-null-importances
 
-### Feature selection using target permutation (Null Importance)
+## Feature selection using target permutation (Null Importance)
 이 Notebook 파일은 다음의 [논문](https://academic.oup.com/bioinformatics/article/26/10/1340/193348) 를 토대로 만든 자료입니다. kaggle의 [Home Credit Default Risk](https://www.kaggle.com/c/home-credit-default-risk) 라는 대회에서 변수 제거를 하기 위해 만들어진 [커널](https://www.kaggle.com/ogrellier/feature-selection-with-null-importances) 입니다.  
 
 #### Null Importance Feature Selection은 실제 변수의 중요도와 임의로 셔플된 목적변수의 변수중요도의 분포를 비교하는 방법입니다.
@@ -39,7 +39,7 @@ Notebook의 시행 과정:
     
 데이터의 전처리 시간상의 이유로, 커널에서는 application_train.csv만을 다룹니다. 하지만 너는 이것을 확장해서 사용하기를 바랍니다. (옮긴 이 : Home Credit Default Risk 대회에서는 총 6개의 data set이 주어지고 FE 과정까지 거치면 1,000개가 넘는 변수가 생겼습니다. 변수가 너무 많은 문제 때문에 **변수 제거** 방법에 대한 논의가 많이 이루어졌고, 이 대회에서 사람들이 많이 사용했던 방법이 Null importance 방법입니다. )
 
-### 패키지 불러오기 
+## 패키지 불러오기 
 
 ```
 import pandas as pd
@@ -63,7 +63,7 @@ import gc
 gc.enable()
 ``` 
 
-### 데이터 불러오기 
+## 데이터 불러오기 
 데이터를 읽고 카테고리 데이터의 전처리를 해줍니다. 
 
 ```
@@ -86,7 +86,7 @@ data.head()
 
 ![](https://github.com/KaggleBreak/databreak-blog/blob/master/src/content/img/choco9966/Nullimportance/p1.PNG)
 
-### 평가 함수 만들기
+## 평가 함수 만들기
 LightGBM의 random forest boosting을 사용하여 평가함수를 만들어줍니다. 
 
 ```
@@ -129,7 +129,7 @@ def get_feature_importances(data, shuffle, seed=None):
     return imp_df
 ```
 
-### 벤치마크를 위한 변수중요도 생성 
+## 벤치마크를 위한 변수중요도 생성 
 
 원래의 논문에서는 변수의 실제 중요도에 관해 이야기하지 않지만, 변수가 실제로 가지는 변수중요도 값을 같이 이해해야 한다고 생각합니다. 
 
@@ -143,7 +143,7 @@ actual_imp_df.head()
 ```
 ![](https://github.com/KaggleBreak/databreak-blog/blob/master/src/content/img/choco9966/Nullimportance/p2.PNG)
 
-### Null Importances 분포 만들기 
+## Null Importances 분포 만들기 
 ```
 null_imp_df = pd.DataFrame()
 nb_runs = 80
@@ -173,7 +173,7 @@ null_imp_df.head()
 
 ![](https://github.com/KaggleBreak/databreak-blog/blob/master/src/content/img/choco9966/Nullimportance/p4.PNG)
 
-### 분포의 예시 
+## 분포의 예시 
 몇 개의 그림은 글보다 훨씬 이해하기 쉽습니다. 
 
 ```
@@ -229,7 +229,7 @@ display_distributions(actual_imp_df_=actual_imp_df, null_imp_df_=null_imp_df, fe
 - 목적변수와 실제로 관련이 없는 높은 분산을 가지는 변수들을 제거 
 - 상호 연관성이 있는 변수를 제거하여 실제 중요도 (또는 unbiased 중요도)을 보여줍니다.
 
-### 점수 특징
+## 점수 특징
 변수를 평가하는 데는 여러 가지 방법이 있습니다.
 
 - 실제 중요도와 Null importance 분포가 많이 떨어진 표본 수를 계산합니다.
@@ -264,14 +264,14 @@ plt.tight_layout()
 ```
 ![](https://github.com/KaggleBreak/databreak-blog/blob/master/src/content/img/choco9966/Nullimportance/p10.PNG)
 
-### 결과 데이터 저장 
+## 결과 데이터 저장 
 
 ```
 null_imp_df.to_csv(`null_importances_distribution_rf.csv`)
 actual_imp_df.to_csv(`actual_importances_ditribution_rf.csv`)
 ```
 
-### 상관없는 기능 제거의 영향 확인
+## 상관없는 기능 제거의 영향 확인
 여기에서는 목적변수와의 상관관계를 측정하는 데 다른 측정 항목을 사용하겠습니다.
 
 ```
@@ -303,7 +303,7 @@ fig.subplots_adjust(top=0.93)
 ```
 ![](https://github.com/KaggleBreak/databreak-blog/blob/master/src/content/img/choco9966/Nullimportance/p11.PNG)
 
-### 다른 임계 값에 따라 변수를 제거하고 점수 측정
+## 다른 임계 값에 따라 변수를 제거하고 점수 측정
 ```
 def score_feature_selection(df=None, train_features=None, cat_feats=None, target=None):
     # Lightgbm을 학습합니다. 
