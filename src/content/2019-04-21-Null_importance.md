@@ -173,6 +173,7 @@ for i in range(nb_runs):
 <div style="width:100%;text-align:center">
   <img src="https://docs.google.com/uc?id=1ilSUy0Ztv73e4GkqBNcIRWug6wfJ3vjn">
 </div>
+
 ```
 null_imp_df.head()
 ```
