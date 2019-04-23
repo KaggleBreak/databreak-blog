@@ -82,9 +82,11 @@ for f_ in categorical_feats:
 data.head()
 ```
 
+
 <div style="width:100%;text-align:center">
   <img src="https://drive.google.com/file/d/1hYXwo-tUgx6jmT_QXMwDVvloUmD9fvPF/view">
 </div>
+
 
 ## 평가 함수 만들기
 LightGBM의 random forest boosting을 사용하여 평가함수를 만들어줍니다. 
