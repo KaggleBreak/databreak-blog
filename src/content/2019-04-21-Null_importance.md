@@ -143,7 +143,10 @@ np.random.seed(123)
 actual_imp_df = get_feature_importances(data=data, shuffle=False)
 actual_imp_df.head()
 ```
-![](https://github.com/KaggleBreak/databreak-blog/blob/master/src/content/img/choco9966/Nullimportance/p2.PNG)
+
+<div style="width:100%;text-align:center">
+  <img src="https://docs.google.com/uc?id=1yQPpZlmi0RTWfvdnd4G8T5u3QclzaS-Q">
+</div>
 
 ## Null Importances 분포 만들기 
 ```
@@ -167,13 +170,16 @@ for i in range(nb_runs):
     print(dsp, end=``, flush=True)
 ```
 
-![](https://github.com/KaggleBreak/databreak-blog/blob/master/src/content/img/choco9966/Nullimportance/p3.PNG)
-
+<div style="width:100%;text-align:center">
+  <img src="https://docs.google.com/uc?id=1ilSUy0Ztv73e4GkqBNcIRWug6wfJ3vjn">
+</div>
 ```
 null_imp_df.head()
 ```
 
-![](https://github.com/KaggleBreak/databreak-blog/blob/master/src/content/img/choco9966/Nullimportance/p4.PNG)
+<div style="width:100%;text-align:center">
+  <img src="https://docs.google.com/uc?id=18DPzh5VLMD5g57L0n3bLhLnt55IvAfEv">
+</div>
 
 ## 분포의 예시 
 몇 개의 그림은 글보다 훨씬 이해하기 쉽습니다. 
@@ -203,23 +209,42 @@ def display_distributions(actual_imp_df_, null_imp_df_, feature_):
 ```
 display_distributions(actual_imp_df_=actual_imp_df, null_imp_df_=null_imp_df, feature_=`LIVINGAPARTMENTS_AVG`)
 ```
-![](https://github.com/KaggleBreak/databreak-blog/blob/master/src/content/img/choco9966/Nullimportance/p5.PNG)
+
+<div style="width:100%;text-align:center">
+  <img src="https://docs.google.com/uc?id=1Iiqi-v-cw8_BrMClXW7huzqWhcKTvKc3">
+</div>
+
 ```
 display_distributions(actual_imp_df_=actual_imp_df, null_imp_df_=null_imp_df, feature_=`CODE_GENDER`)
 ```
-![](https://github.com/KaggleBreak/databreak-blog/blob/master/src/content/img/choco9966/Nullimportance/p6.PNG)
+
+<div style="width:100%;text-align:center">
+  <img src="https://docs.google.com/uc?id=1gokoH-bW1N54b0Enir1l-MHHRJ_uTwon">
+</div>
+
 ```
 display_distributions(actual_imp_df_=actual_imp_df, null_imp_df_=null_imp_df, feature_=`EXT_SOURCE_1`)
 ```
-![](https://github.com/KaggleBreak/databreak-blog/blob/master/src/content/img/choco9966/Nullimportance/p7.PNG)
+
+<div style="width:100%;text-align:center">
+  <img src="https://docs.google.com/uc?id=1B-C7t9RKiJNDu2EBXssGTMks-54X75oC">
+</div>
+
 ```
 display_distributions(actual_imp_df_=actual_imp_df, null_imp_df_=null_imp_df, feature_=`EXT_SOURCE_2`)
 ```
-![](https://github.com/KaggleBreak/databreak-blog/blob/master/src/content/img/choco9966/Nullimportance/p8.PNG)
+
+<div style="width:100%;text-align:center">
+  <img src="https://docs.google.com/uc?id=1CXOYHDnPQuu_PA4ifkabzZWuPCuvyYF9">
+</div>
+
 ```
 display_distributions(actual_imp_df_=actual_imp_df, null_imp_df_=null_imp_df, feature_=`EXT_SOURCE_3`)
 ```
-![](https://github.com/KaggleBreak/databreak-blog/blob/master/src/content/img/choco9966/Nullimportance/p9.PNG)
+
+<div style="width:100%;text-align:center">
+  <img src="https://docs.google.com/uc?id=1iVI8mAMFrdFxLbt5ORPvmUXXF1id7gIp">
+</div>
 
 위의 그림에서 Null Importance 방법의 장점이 보입니다. 특히 잘 알려진 사실은 다음과 같습니다.
 
@@ -264,7 +289,10 @@ sns.barplot(x=`gain_score`, y=`feature`, data=scores_df.sort_values(`gain_score`
 ax.set_title(`Feature scores wrt gain importances`, fontweight=`bold`, fontsize=14)
 plt.tight_layout()
 ```
-![](https://github.com/KaggleBreak/databreak-blog/blob/master/src/content/img/choco9966/Nullimportance/p10.PNG)
+
+<div style="width:100%;text-align:center">
+  <img src="https://docs.google.com/uc?id=1FWhO4EAcVUxA9cFtNue_5avfhUhjsJvv">
+</div>
 
 ## 결과 데이터 저장 
 
@@ -303,7 +331,10 @@ plt.tight_layout()
 plt.suptitle("Features` split and gain scores", fontweight=`bold`, fontsize=16)
 fig.subplots_adjust(top=0.93)
 ```
-![](https://github.com/KaggleBreak/databreak-blog/blob/master/src/content/img/choco9966/Nullimportance/p11.PNG)
+
+<div style="width:100%;text-align:center">
+  <img src="https://docs.google.com/uc?id=1bQTbORZK6uPDEGe6NxEnB7iNMVqwMeMz">
+</div>
 
 ## 다른 임계 값들에 따라 변수를 제거하고 점수 측정
 ```
@@ -354,7 +385,10 @@ for threshold in [0, 10, 20, 30 , 40, 50 ,60 , 70, 80 , 90, 95, 99]:
     gain_results = score_feature_selection(df=data, train_features=gain_feats, cat_feats=gain_cat_feats, target=data[`TARGET`])
     print(`\t GAIN  : %.6f +/- %.6f` % (gain_results[0], gain_results[1]))
 ```
-![](https://github.com/KaggleBreak/databreak-blog/blob/master/src/content/img/choco9966/Nullimportance/p12.PNG)
+
+<div style="width:100%;text-align:center">
+  <img src="https://docs.google.com/uc?id=195JF_w_iKhv6VbZn_x5UWjTeFAC9Azj1">
+</div>
 
 출처 
 - https://www.kaggle.com/ogrellier/feature-selection-with-null-importances
