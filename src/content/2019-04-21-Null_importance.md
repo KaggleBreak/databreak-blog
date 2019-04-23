@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Feature Selection with Null Importances(KR)"
-image: /img/choco9966/nullimportance.PNG
+image: img/choco9966/nullimportance.PNG
 author: choco9966
 date: "2019-04-21T15:46:37.121Z"
 tags:
@@ -82,7 +82,9 @@ for f_ in categorical_feats:
 data.head()
 ```
 
-![](https://github.com/KaggleBreak/databreak-blog/blob/master/src/content/img/choco9966/Nullimportance/p1.PNG)
+<div style="width:100%;text-align:center">
+  <img src="https://drive.google.com/open?id=1hYXwo-tUgx6jmT_QXMwDVvloUmD9fvPF">
+</div>
 
 ## 평가 함수 만들기
 LightGBM의 random forest boosting을 사용하여 평가함수를 만들어줍니다. 
