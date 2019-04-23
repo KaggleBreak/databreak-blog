@@ -84,7 +84,7 @@ data.head()
 
 
 <div style="width:100%;text-align:center">
-  <img src="https://drive.google.com/file/d/1hYXwo-tUgx6jmT_QXMwDVvloUmD9fvPF/view?usp=sharing">
+  <img src="https://docs.google.com/uc?id=1hYXwo-tUgx6jmT_QXMwDVvloUmD9fvPF">
 </div>
 
 
