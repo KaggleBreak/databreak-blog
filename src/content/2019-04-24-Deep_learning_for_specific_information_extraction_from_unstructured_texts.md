@@ -51,7 +51,7 @@ https://towardsdatascience.com/deep-learning-for-specific-information-extraction
 <br>
 
 <div style="width:100%;text-align:center">
-    <img src="https://drive.google.com/uc?id=1iPctL3wfXdrFyqnIaB3E_NkETQ2pkdXm">
+    <img src="https://drive.google.com/uc?id=1iPctL3wfXdrFyqnIaB3E_NkETQ2pkdXm" style="width:100%;">
 </div>
 
 <br>
@@ -63,7 +63,7 @@ https://towardsdatascience.com/deep-learning-for-specific-information-extraction
 <br>
 
 <div style="width:100%;text-align:center">
-    <img src="https://cdn-images-1.medium.com/max/800/1*BwkQ3sl9jESciEPlyZu4Wg.png">
+    <img src="https://cdn-images-1.medium.com/max/800/1*BwkQ3sl9jESciEPlyZu4Wg.png" style="width:100%;">
 </div>
 
 <center style=font-size:"12px;">
@@ -101,7 +101,7 @@ https://towardsdatascience.com/deep-learning-for-specific-information-extraction
 <br>
 
 <div style="width:100%;text-align:center">
-    <img src="https://cdn-images-1.medium.com/max/800/1*ORQjzTETyHJomGjtiJqScA.png">
+    <img src="https://cdn-images-1.medium.com/max/800/1*ORQjzTETyHJomGjtiJqScA.png" style="width:100%;">
 </div>
 
 <br>
@@ -115,7 +115,7 @@ https://towardsdatascience.com/deep-learning-for-specific-information-extraction
 <br>
 
 <div style="width:100%;text-align:center">
-    <img src="https://cdn-images-1.medium.com/max/1200/1*6jNjvDvTaIhodaIiqRJ_hw.png">
+    <img src="https://cdn-images-1.medium.com/max/1200/1*6jNjvDvTaIhodaIiqRJ_hw.png" style="width:100%;">
 </div>
 
 <br>
@@ -133,7 +133,7 @@ https://towardsdatascience.com/deep-learning-for-specific-information-extraction
 <br>
 
 <div style="width:100%;text-align:center">
-    <img src="https://cdn-images-1.medium.com/max/800/1*qExsGPU0_exp_8wmC0NO-w.png">
+    <img src="https://cdn-images-1.medium.com/max/800/1*qExsGPU0_exp_8wmC0NO-w.png" style="width:100%;">
 </div>
 
 <center style=font-size:"12px;">
@@ -143,27 +143,86 @@ https://towardsdatascience.com/deep-learning-for-specific-information-extraction
 <br>
 
 해당 아키텍쳐의 Keras 를 이용한 구현한 코드는 아래와 같습니다.
-
 <br>
+```python
+    class SkillsExtractorNN:
+        def __init__(self, word_features_dim, dense_features_dim):
 
-<script src="https://gist.github.com/IntuitionEngineering/a6e6e8a1f942a528c97e1d01af782ea2.js" charset="utf-8" style="width:100%"></script>
+            lstm_input_phrase = keras.layers.Input(shape=(None, word_features_dim))
+            lstm_input_cont = keras.layers.Input(shape=(None, word_features_dim))
+            dense_input = keras.layers.Input(shape=(dense_features_dim,))
 
+            lstm_emb_phrase = keras.layers.LSTM(256)(lstm_input_phrase)
+            lstm_emb_phrase = keras.layers.Dense(128, activation='relu')(lstm_emb_phrase)
+
+            lstm_emb_cont = keras.layers.LSTM(256)(lstm_input_cont)
+            lstm_emb_cont = keras.layers.Dense(128, activation='relu')(lstm_emb_cont)
+
+            dense_emb = keras.layers.Dense(512, activation='relu')(dense_input)
+            dense_emb = keras.layers.Dense(256, activation='relu')(dense_emb)
+
+            x = keras.layers.concatenate([lstm_emb_phrase, lstm_emb_cont, dense_emb])
+            x = keras.layers.Dense(128, activation='relu')(x)
+            x = keras.layers.Dense(64, activation='relu')(x)
+            x = keras.layers.Dense(32, activation='relu')(x)
+
+            main_output = keras.layers.Dense(2, activation='softplus')(x)
+
+            self.model = keras.models.Model(inputs=[lstm_input_phrase, lstm_input_cont, dense_input],
+                                            outputs=main_output)
+
+            optimizer = keras.optimizers.Adam(lr=0.0001)
+
+            self.model.compile(optimizer=optimizer, loss='binary_crossentropy')
+
+        def fit(self, x_lstm_phrase, x_lstm_context, x_dense, y,
+            val_split=0.25, patience=5, max_epochs=1000, batch_size=32):
+
+            x_lstm_phrase_seq = keras.preprocessing.sequence.pad_sequences(x_lstm_phrase)
+            x_lstm_context_seq = keras.preprocessing.sequence.pad_sequences(x_lstm_context)
+
+            y_onehot = onehot_transform(y)
+
+            self.model.fit([x_lstm_phrase_seq, x_lstm_context_seq, x_dense],
+                        y_onehot,
+                        batch_size=batch_size,
+                        pochs=max_epochs,
+                        validation_split=val_split,
+                        callbacks=[keras.callbacks.EarlyStopping(monitor='val_loss', patience=patience)])
+
+
+        def predict(self, x_lstm_phrase, x_lstm_context, x_dense):
+
+            x_lstm_phrase_seq = keras.preprocessing.sequence.pad_sequences(x_lstm_phrase)
+            x_lstm_context_seq = keras.preprocessing.sequence.pad_sequences(x_lstm_context)
+
+            y = self.model.predict([x_lstm_phrase_seq, x_lstm_context_seq, x_dense])
+
+            return y
+```
 <br>
 
 모델 훈련의 결과 중 최상의 결과는 Adam 옵티마이저를 사용, learning rate 를 0.0001 까지 낮춤을 통해서 얻을 수 있었습니다. 우리는 모델이 두 개의 클래스로 분류하도록 설계 했기 때문에 손실함수는 binary crossentropy 함수를 사용했습니다. 또한 후보 구문의 feature 벡터에 대한 예측을 형성하면서 동시에 편리함을 위해 교차 검증 및 예측 기능을 사용하여 신경망의 훈련과 자동 정지를 수행하는 적합한 방법을 추가했습니다.
 
 <br>
 
-<script src="https://gist.github.com/IntuitionEngineering/89adac8928b5898d379dbea1e8f3eaef.js" charset="utf-8" style="width:100%"></script>
-
-<br>
-
 pad_sequence 함수는 feature 시퀀스 리스트를 리스트 내에서 가장 긴 시퀀스와 같은 너비의 2d array 로  변환해줍니다. 이 함수를 LSTM 레이어로 이동하는 가변 길이 데이터를 모델 훈련에 필요한 형식으로 가져오기 위해서 사용했습니다.
-
 <br>
 
-<script src="https://gist.github.com/IntuitionEngineering/3ad29ad100f813d732e4128165cc2625.js" charset="utf-8" style="width:100%"></script>
+```python
 
+    def onehot_transform(y):
+
+        onehot_y = []
+
+        for numb in y:
+            onehot_arr = np.zeros(2)
+            onehot_arr[numb] = 1
+            onehot_y.append(np.array(onehot_arr))
+
+        return np.array(onehot_y)
+
+```
 <br>
 
 개체와 컨텍스트의 단어 수가 임의의 개수를 가질 때,  고정된 사이즈의 벡터를 사용하는 것은 합리적인 것처럼 보이지 않습니다. 따라서 임의이 길이의 벡터를 처리하는 RNN 은 여기에 편리하고 아주 자연스러운 해결책이 됩니다. 우리가 테스트 해본 결과 고정된 길이의 벡터와 다양한 길이의 벡터를 처리하기 위한 LSTM 레이어를 처리하기 위해 Dense 레이어를 사용하는 것이 최적임을 입증할 수 있었습니다.
@@ -175,11 +234,23 @@ LSTM 과 dense 의 다양한 조합으로 여러가지 아키텍쳐를 실험해
 <br>
 
 #### Results
+<br>
+<div style="text-align:center;">
 
-<script src="https://gist.github.com/IntuitionEngineering/0e2c841d738834258affbe2d9ac12a8b.js" charset="utf-8" style="width:100%"></script>
+|  CV  | Extracted skills |
+|:-----------------: |:-----------------------:|
+| Software engineer on an educational game for <br> schoolers. The game was based on the story of <br> "Tom Sawyer". The game was developed on Delphi and Java. | Software engineer, 0.999 <br> Delphi, 0.979 <br> Java, 0.974 |
+| Teaching a courses on Big Data <br> analytics for bussiness management. <br> Target of the training - overview on <br> big data and predictive modelling <br> - and how the data and analytics <br> can solve business problems. | Big Data analytics, 0.998 <br> predictive modelling, 0.981 <br> analytics, 0.943 <br> bussiness management, 0.926 <br> big data, 0.771 |
+| Work with Hadoop and Big Data stack on building <br> data pipelines for streaming and batch processing <br> of the data using Lambda architecture. <br> Product expert for Hadoop and Big Data <br> - including Hive, KNOX and Sqoop. | Lambda architecture, 0.998 <br> Big Data stack, 0.998 <br> building data pipelines, 0.997 <br> Product expert, 0.996 <br> KNOX, 0.992 <br> Hive, 0.982 <br> Sqoop, 0.951 <br> Hadoop, 0.945 <br> Big Data, 0.905 <br> batch processing, 0.828 |
+| Developed software for Unix server-side installations <br> of different products. | Unix server-side installations, 0.991 <br> software, 0.979 |
+| Teaching programming courses in server side web <br> development using Javascript, Python and MySQL. |server side web development, 0.998 <br> Python, 0.99 <br> Javascript, 0.961 <br> MySQL, 0.949 |
+| Responsible for developing software in C++ and Java <br> for Trans Golden Oland operations office. | developing software, 0.996 <br> C++, 0.989 <br> Java, 0.9 |
 
+</div>
 <center style=font-size:"12px;">
    Examples of extracted skills
-</center>
+</center><br>
 
+
+#### 마무리하며
 <br>모델 학습에 사용된 모든 이력서는 IT 업계 분야의 이력서였습니다. 우리 모델은 디자인, 금융과 같은 다른 산업에 속한 이력서의 데이터셋에서도 상당히 합리적인 성능을 보여주었습니다. 분명히 완전히 다른 구조와 스타일로 이력서를 처리하면 모델 성능이 저하됩니다. 우리는 또한 '전문기술' 개념에 대한 우리의 이해는 다른 누군가의 이해와 다를 수 있음을 언급하고 싶습니다. 우리 모델에게 있어서 정답을 찾기 어려운 사례 중 하나는 '전문기술'을 종종 새로운 회사 이름으로부터 뽑아내는 경우였습니다. 이는 '전문기술' 이 종종 소프트웨어 프레임워크와 동일하기 때문이거나 때로는 사람의 경우도 이것이 회사 이름인지 새로운 JS 프레임워크 또는 Python 라이브러리인지 말하기 어려운 경우도 있었습니다. 그렇지만, 대부분의 경우에서 우리의 모델은 자동 이력서 분서에 유용한 툴로 사용될 수 있으며, 일부 통계적인 방법을 사용하면 임의이 이력서 자료에 대해 광범위한 데이터 사이언스 작업을 해결할 수 있습니다.
