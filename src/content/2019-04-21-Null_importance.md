@@ -83,7 +83,7 @@ data.head()
 ```
 
 <div style="width:100%;text-align:center">
-  <img src="https://drive.google.com/file/d/1hYXwo-tUgx6jmT_QXMwDVvloUmD9fvPF/view">
+  <img src="https://drive.google.com/file/d/1hYXwo-tUgx6jmT_QXMwDVvloUmD9fvPF">
 </div>
 
 ## 평가 함수 만들기
