@@ -5,6 +5,9 @@ import rehypeReact from 'rehype-react';
 
 import { colors } from '../styles/colors';
 
+// tslint:disable-next-line:no-import-side-effect
+import "katex/dist/katex.min.css";
+
 export const PostFullContent = styled.section`
   @import url('https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700&subset=korean');
   position: relative;
