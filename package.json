@@ -15,7 +15,6 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@danpalmer/gatsby-remark-embed-gist": "^1.1.3",
     "@emotion/core": "^10.0.7",
     "@emotion/styled": "^10.0.7",
     "@emotion/styled-base": "^10.0.7",
@@ -35,7 +34,6 @@
     "gatsby-plugin-typescript": "2.0.7",
     "gatsby-remark-abbr": "1.0.0",
     "gatsby-remark-copy-linked-files": "2.0.9",
-    "gatsby-remark-embed-gist": "^1.1.7",
     "gatsby-remark-images": "3.0.3",
     "gatsby-remark-katex": "^3.0.4",
     "gatsby-remark-prismjs": "3.2.4",

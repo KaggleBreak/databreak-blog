@@ -7,6 +7,8 @@ import { colors } from '../styles/colors';
 
 // tslint:disable-next-line:no-import-side-effect
 import "katex/dist/katex.min.css";
+// tslint:disable-next-line:no-import-side-effect
+import "prismjs/themes/prism-tomorrow.css"
 
 export const PostFullContent = styled.section`
   @import url('https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700&subset=korean');
