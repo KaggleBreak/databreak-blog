@@ -13,17 +13,8 @@ draft: false
 ## 참고자료 
 
 *   원본 아티클 
-    *  [The Illustrated Word2vec](https://jalammar.github.io/illustrated-word2vec/)
-    *  저자 Jay Alammar
-
-
-## **들어가기 전에**
-
-* kkk : 
-
-
-
-                                       
+    *  [The Illustrated Word2vec](https://jalammar.github.io/illustrated-word2vec/),   저자 Jay Alammar
+                                   
 ## 1. INTRODUCTION     
                         
 * 머신러닝에서 가장 매혹적인 아이디어 중 하나가 임베딩이라는 개념이라고 생각합니다. 
