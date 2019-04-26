@@ -11,10 +11,6 @@ tags:
 ## Feature selection using target permutation (Null Importance)
 아래의 글은 Olivier의 [feature selection with null importances](https://www.kaggle.com/ogrellier/feature-selection-with-null-importances)를 번역한 글입니다.
 
-장점 
-- 변수들끼리의 상호작용 중요성을 없애지 않음. 
-- 높은 분산을 가지거나 목적변수와 연관이 없는 변수들을 쉽게 찾을 수 있음. 
-
 논문
 - https://academic.oup.com/bioinformatics/article/26/10/1340/193348
 
@@ -23,14 +19,19 @@ tags:
 
 이 Notebook 파일은 다음의 [논문](https://academic.oup.com/bioinformatics/article/26/10/1340/193348) 를 토대로 만든 자료입니다. kaggle의 [Home Credit Default Risk](https://www.kaggle.com/c/home-credit-default-risk) 라는 대회에서 변수 제거를 하기 위해 만들어진 [커널](https://www.kaggle.com/ogrellier/feature-selection-with-null-importances) 입니다.  
 
-**Null Importance Feature Selection은 실제 변수의 중요도와 임의로 셔플된 목적변수의 변수중요도의 분포를 비교하는 방법입니다.**
+---
 
+Null Importance Feature Selection: 
+- 실제 변수의 중요도와 임의로 셔플된 목적변수의 변수중요도의 분포를 비교하는 방법입니다. 
+- 장점: 
+    - 변수들끼리의 상호작용 중요성을 없애지 않습니다. 
+    - 높은 분산을 가지거나 목적변수와 연관이 없는 변수들을 쉽게 찾을 수 있습니다. 
 
 Notebook의 시행 과정:
 
 - Null importance 분포를 만듭니다 : 이 분포는 목적변수를 임의로 섞음으로써 만들어집니다. 이 분포는 목적변수에 관계없는 변수를 모델이 어떻게 이해하는지 보여줍니다. 
 
-- 먼저 기존의 목적변수에 따른 변수의 중요도를 수집합니다. : 이 &nbsp;중요도는 Null importance 분포와 비교를 할 수 있게 해주는 벤치마크 역할을 해줍니다. 
+- 먼저 기존의 목적변수에 따른 변수의 중요도를 수집합니다. : 이 중요도는 Null importance 분포와 비교를 할 수 있게 해주는 벤치마크 역할을 해줍니다. 
 
 - 각각의 변수들에 대해 실제 중요도 평가합니다 :
     - Null importance에 대한 실제 중요도의 확률값을 계산합니다. 논문에서 제안된 수집 된 데이터에 알려진 분포를 맞추기 위한 매우 간단한 추정을 사용합니다. 실제로 여기서 목적변수가 1이 될 확률을 계산할 것입니다.
