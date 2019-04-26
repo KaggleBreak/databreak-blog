@@ -23,7 +23,7 @@ tags:
 
 이 Notebook 파일은 다음의 [논문](https://academic.oup.com/bioinformatics/article/26/10/1340/193348) 를 토대로 만든 자료입니다. kaggle의 [Home Credit Default Risk](https://www.kaggle.com/c/home-credit-default-risk) 라는 대회에서 변수 제거를 하기 위해 만들어진 [커널](https://www.kaggle.com/ogrellier/feature-selection-with-null-importances) 입니다.  
 
-#### Null Importance Feature Selection은 실제 변수의 중요도와 임의로 셔플된 목적변수의 변수중요도의 분포를 비교하는 방법입니다.
+**Null Importance Feature Selection은 실제 변수의 중요도와 임의로 셔플된 목적변수의 변수중요도의 분포를 비교하는 방법입니다.**
 
 Notebook의 시행 과정:
 
@@ -133,7 +133,7 @@ def get_feature_importances(data, shuffle, seed=None):
 
 ## 벤치마크를 위한 변수중요도 생성 
 
-원래의 논문에서는 변수의 실제 중요도에 관해 이야기하지 않지만, 변수가 실제로 가지는 변수중요도 값을 같이 이해해야 한다고 생각합니다. 
+원래의 논문에서는 변수의 실제 중요도에 관해 이야기하지 않지만, 변수가 실제로 가지는 변수 중요도 값을 같이 이해해야 한다고 생각합니다. 
 
 ```
 # seed 값을 설정하여줍니다. 
@@ -250,7 +250,7 @@ display_distributions(actual_imp_df_=actual_imp_df, null_imp_df_=null_imp_df, fe
 위의 그림에서 Null Importance 방법의 장점이 보입니다. 특히 잘 알려진 사실은 다음과 같습니다.
 
 - 충분한 차이가 있는 모든 기능을 트리 모델로 사용하고 이해할 수 있습니다. 더 나은 점수를 내는 데 도움이 되는 스플릿을 항상 찾을 수 있습니다.
-- 상관 된 변수들은 변수 중 하나가 사용되면 다른 하나는 부패한 중요도를 가집니다. 선택된 기능은 매우 중요하며 관련 변수는 부패한 중요도를 갖습니다.
+- 상관 된 변수들은 변수 중 하나가 사용되면 다른 하나는 중요도가 감소하게 됩니다. 이렇게 선택된 변수는 매우 중요하며 관련 변수는 바뀐 중요도를 갖습니다.
 
 현재 방법은 다음을 허용합니다.
 
