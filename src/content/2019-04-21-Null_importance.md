@@ -8,7 +8,7 @@ tags:
   - FeatureSelection
 ---
 
-# Feature selection using target permutation (Null Importance)
+## Feature selection using target permutation (Null Importance)
 아래의 글은 Olivier의 [feature selection with null importances](https://www.kaggle.com/ogrellier/feature-selection-with-null-importances)를 번역한 글입니다.
 
 장점 
@@ -25,6 +25,7 @@ tags:
 
 **Null Importance Feature Selection은 실제 변수의 중요도와 임의로 셔플된 목적변수의 변수중요도의 분포를 비교하는 방법입니다.**
 
+
 Notebook의 시행 과정:
 
 - Null importance 분포를 만듭니다 : 이 분포는 목적변수를 임의로 섞음으로써 만들어집니다. 이 분포는 목적변수에 관계없는 변수를 모델이 어떻게 이해하는지 보여줍니다. 
@@ -35,11 +36,11 @@ Notebook의 시행 과정:
     - Null importance에 대한 실제 중요도의 확률값을 계산합니다. 논문에서 제안된 수집 된 데이터에 알려진 분포를 맞추기 위한 매우 간단한 추정을 사용합니다. 실제로 여기서 목적변수가 1이 될 확률을 계산할 것입니다.
     - 실제 중요도를 null importance의 평균 및 최대치와 간단히 비교합니다. 그러면 데이터 세트의 주요 기능변수을 볼 수 있을 것입니다. 실제로 앞의 방법은 우리에게 많은 것들을 줄 수 있습니다.
     
-데이터의 전처리 시간상의 이유로, 커널에서는 application_train.csv만을 다룹니다. 하지만 너는 이것을 확장해서 사용하기를 바랍니다. (옮긴 이 : Home Credit Default Risk 대회에서는 총 6개의 data set이 주어지고 FE 과정까지 거치면 1,000개가 넘는 변수가 생겼습니다. 변수가 너무 많은 문제 때문에 **변수 제거** 방법에 대한 논의가 많이 이루어졌고, 이 대회에서 사람들이 많이 사용했던 방법이 Null importance 방법입니다. )
+데이터의 전처리 시간상의 이유로, 커널에서는 application_train.csv만을 다룹니다. 하지만 너는 이것을 확장해서 사용하기를 바랍니다. (옮긴 이 : Home Credit Default Risk 대회에서는 총 6개의 data set이 주어지고 FE 과정까지 거치면 1,000개가 넘는 변수가 생겼습니다. 변수가 너무 많은 문제 때문에 *변수 제거* 방법에 대한 논의가 많이 이루어졌고, 이 대회에서 사람들이 많이 사용했던 방법이 Null importance 방법입니다. )
 
-## 패키지 불러오기 
+### 패키지 불러오기 
 
-```
+```python
 import pandas as pd
 import numpy as np
 
@@ -61,10 +62,10 @@ import gc
 gc.enable()
 ``` 
 
-## 데이터 불러오기 
+### 데이터 불러오기 
 데이터를 읽고 카테고리 데이터의 전처리를 해줍니다. 
 
-```
+```python
 data = pd.read_csv(`application_train.csv`)
 
 categorical_feats = [
@@ -78,7 +79,7 @@ for f_ in categorical_feats:
     data[f_] = data[f_].astype(`category`)
 ```
 
-```
+```python
 data.head()
 ```
 
@@ -88,10 +89,10 @@ data.head()
 </div>
 
 
-## 평가 함수 만들기
+### 평가 함수 만들기
 LightGBM의 random forest boosting을 사용하여 평가함수를 만들어줍니다. 
 
-```
+```python
 def get_feature_importances(data, shuffle, seed=None):
     # 실제로 사용할 변수들을 모아줍니다. 목적변수('TARGET')는 y 값이어서 빼고, SK_ID_CURR는 식별자여서 제거합니다. 
     train_features = [f for f in data if f not in [`TARGET`, `SK_ID_CURR`]]
@@ -131,11 +132,11 @@ def get_feature_importances(data, shuffle, seed=None):
     return imp_df
 ```
 
-## 벤치마크를 위한 변수중요도 생성 
+### 벤치마크를 위한 변수중요도 생성 
 
 원래의 논문에서는 변수의 실제 중요도에 관해 이야기하지 않지만, 변수가 실제로 가지는 변수 중요도 값을 같이 이해해야 한다고 생각합니다. 
 
-```
+```python
 # seed 값을 설정하여줍니다. 
 np.random.seed(123)
 
@@ -148,8 +149,8 @@ actual_imp_df.head()
   <img src="https://docs.google.com/uc?id=1yQPpZlmi0RTWfvdnd4G8T5u3QclzaS-Q">
 </div>
 
-## Null Importances 분포 만들기 
-```
+### Null Importances 분포 만들기 
+```python
 null_imp_df = pd.DataFrame()
 nb_runs = 80
 import time
@@ -174,7 +175,7 @@ for i in range(nb_runs):
   <img src="https://docs.google.com/uc?id=1ilSUy0Ztv73e4GkqBNcIRWug6wfJ3vjn">
 </div>
 
-```
+```python
 null_imp_df.head()
 ```
 
@@ -182,10 +183,10 @@ null_imp_df.head()
   <img src="https://docs.google.com/uc?id=18DPzh5VLMD5g57L0n3bLhLnt55IvAfEv">
 </div>
 
-## 분포의 예시 
+### 분포의 예시 
 몇 개의 그림은 글보다 훨씬 이해하기 쉽습니다. 
 
-```
+```python
 def display_distributions(actual_imp_df_, null_imp_df_, feature_):
     plt.figure(figsize=(13, 6))
     gs = gridspec.GridSpec(1, 2)
@@ -207,7 +208,7 @@ def display_distributions(actual_imp_df_, null_imp_df_, feature_):
     plt.xlabel(`Null Importance (gain) Distribution for %s ` % feature_.upper())
 ```
 
-```
+```python
 display_distributions(actual_imp_df_=actual_imp_df, null_imp_df_=null_imp_df, feature_=`LIVINGAPARTMENTS_AVG`)
 ```
 
@@ -215,7 +216,7 @@ display_distributions(actual_imp_df_=actual_imp_df, null_imp_df_=null_imp_df, fe
   <img src="https://docs.google.com/uc?id=1Iiqi-v-cw8_BrMClXW7huzqWhcKTvKc3">
 </div>
 
-```
+```python
 display_distributions(actual_imp_df_=actual_imp_df, null_imp_df_=null_imp_df, feature_=`CODE_GENDER`)
 ```
 
@@ -223,7 +224,7 @@ display_distributions(actual_imp_df_=actual_imp_df, null_imp_df_=null_imp_df, fe
   <img src="https://docs.google.com/uc?id=1gokoH-bW1N54b0Enir1l-MHHRJ_uTwon">
 </div>
 
-```
+```python
 display_distributions(actual_imp_df_=actual_imp_df, null_imp_df_=null_imp_df, feature_=`EXT_SOURCE_1`)
 ```
 
@@ -231,7 +232,7 @@ display_distributions(actual_imp_df_=actual_imp_df, null_imp_df_=null_imp_df, fe
   <img src="https://docs.google.com/uc?id=1B-C7t9RKiJNDu2EBXssGTMks-54X75oC">
 </div>
 
-```
+```python
 display_distributions(actual_imp_df_=actual_imp_df, null_imp_df_=null_imp_df, feature_=`EXT_SOURCE_2`)
 ```
 
@@ -239,7 +240,7 @@ display_distributions(actual_imp_df_=actual_imp_df, null_imp_df_=null_imp_df, fe
   <img src="https://docs.google.com/uc?id=1CXOYHDnPQuu_PA4ifkabzZWuPCuvyYF9">
 </div>
 
-```
+```python
 display_distributions(actual_imp_df_=actual_imp_df, null_imp_df_=null_imp_df, feature_=`EXT_SOURCE_3`)
 ```
 
@@ -257,7 +258,7 @@ display_distributions(actual_imp_df_=actual_imp_df, null_imp_df_=null_imp_df, fe
 - 목적변수와 실제로 관련이 없는 높은 분산을 가지는 변수들을 제거 
 - 상호 연관성이 있는 변수를 제거하여 실제 중요도 (또는 unbiased 중요도)을 보여줍니다.
 
-## 점수 특징
+### 점수 특징
 변수를 평가하는 데는 여러 가지 방법이 있습니다.
 
 - 실제 중요도와 Null importance 분포가 많이 떨어진 표본 수를 계산합니다.
@@ -265,7 +266,7 @@ display_distributions(actual_imp_df_=actual_imp_df, null_imp_df_=null_imp_df, fe
 
 첫 번째 단계에서는 로그 실제 기능 중요도를 Null 분포의 75 백분위 수로 나눈 값을 사용합니다.
 
-```
+```python
 feature_scores = []
 for _f in actual_imp_df[`feature`].unique():
     f_null_imps_gain = null_imp_df.loc[null_imp_df[`feature`] == _f, `importance_gain`].values
@@ -295,17 +296,17 @@ plt.tight_layout()
   <img src="https://docs.google.com/uc?id=1FWhO4EAcVUxA9cFtNue_5avfhUhjsJvv">
 </div>
 
-## 결과 데이터 저장 
+### 결과 데이터 저장 
 
-```
+```python
 null_imp_df.to_csv(`null_importances_distribution_rf.csv`)
 actual_imp_df.to_csv(`actual_importances_ditribution_rf.csv`)
 ```
 
-## 상관없는 기능 제거의 영향 확인
+### 상관없는 기능 제거의 영향 확인
 여기에서는 목적변수와의 상관관계를 측정하는 데 다른 측정 항목을 사용하겠습니다.
 
-```
+```python
 correlation_scores = []
 for _f in actual_imp_df[`feature`].unique():
     f_null_imps = null_imp_df.loc[null_imp_df[`feature`] == _f, `importance_gain`].values
@@ -337,8 +338,8 @@ fig.subplots_adjust(top=0.93)
   <img src="https://docs.google.com/uc?id=1bQTbORZK6uPDEGe6NxEnB7iNMVqwMeMz">
 </div>
 
-## 다른 임계 값들에 따라 변수를 제거하고 점수 측정
-```
+### 다른 임계 값들에 따라 변수를 제거하고 점수 측정
+```python
 def score_feature_selection(df=None, train_features=None, cat_feats=None, target=None):
     # Lightgbm을 학습합니다. 
     dtrain = lgb.Dataset(df[train_features], target, free_raw_data=False, silent=True)
