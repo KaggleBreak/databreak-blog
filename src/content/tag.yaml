@@ -16,3 +16,6 @@
 - id: Optimzation
   description: About Optimzation related articles.
   image: img/computer.jpg
+- id: FeatureEngineering
+  description: About Feature Engineering related articles.
+  image: img/computer.jpg
