@@ -32,7 +32,7 @@ draft: false
 
 가장 간단한 기법인 선 그래프는 관계(relationship)에 혹은 한 변수가 다른 변수에 대한 종속(dependence) 를 그려주는 데 사용됩니다.두 변수 사이의 관계를 그리려면 단순히 plot 함수를 이용하면 됩니다.
 
-![]( )
+<img src="https://raw.githubusercontent.com/KaggleBreak/databreak-blog/master/src/content/img/rlarkdals7/vis-1.png">
 
 **Bar Chart**
 
