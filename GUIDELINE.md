@@ -38,6 +38,7 @@
 
 
 ## 포스팅 작업 순서
+0. 블로그에 올리는 내용이 원작자가 있으면 메일로 Permission을 받는다. [Creator Group Permission Mail](https://docs.google.com/document/d/1Udkz3AYy-t1GhtvGSUQQQ8BXpAnNqyCxzsQ7jnA8_gg/edit)
 1. 새로운 Issue를 발급하며, Title & Topic / Upload schedule / Reference를 적습니다.
 2. 자기 자신을 self-assign합니다. 혹은 자신이 assign 되어있는 이슈를 찾습니다.
 3. 포스터 문서 작업을 마치면 해당 파일을 push 합니다.
