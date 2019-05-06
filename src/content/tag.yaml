@@ -19,3 +19,6 @@
 - id: FeatureEngineering
   description: About Feature Engineering related articles.
   image: img/computer.jpg
+- id: Visualization
+  description: About Visualization related articles.
+  image: img/computer.jpg
