@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Almost Everything You Need to Know About Time Series (Korean)
-image: img/inahjeon/timeseries.png
+image: img/inahjeon/timeseries.jpeg
 author: inahjeon
 date: "2019-05-06T21:37:37.121Z"
 tags: 
