@@ -149,13 +149,13 @@ SARIMA는 실제로 non-stationary 속성과 seasonality를 가진 시계열 데
 
 AR(p)의 수학적 표현:
 
-![]https://wikimedia.org/api/rest_v1/media/math/render/svg/783f17f3ab83135ed3828b73b0957735a1b63229
+![](https://wikimedia.org/api/rest_v1/media/math/render/svg/783f17f3ab83135ed3828b73b0957735a1b63229)
 
 그리고, 우리는 moving average model MA(q)을 추가합니다. MA(q)는 q차 moving average model 입니다.
 
 MA(q)의 수학적 표현:
 
-![]https://wikimedia.org/api/rest_v1/media/math/render/svg/4323522c6e09cf6fd9e5b1c2174c3281334bad80
+![](https://wikimedia.org/api/rest_v1/media/math/render/svg/4323522c6e09cf6fd9e5b1c2174c3281334bad80)
 
 (여기까지가 ARMA(p, q) 모델입니다.)
 
