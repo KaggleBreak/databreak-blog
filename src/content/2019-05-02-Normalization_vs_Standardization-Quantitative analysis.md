@@ -49,7 +49,7 @@ tags:
 첫째, 저는 Normalization와 Standardization의 차이점을 이해하려고했습니다.
 그래서 저는 호기심을 만족시키는 수학적 배경을 제공하는 Sebastian Raschka의 훌륭한 [블로그](https://sebastianraschka.com/Articles/2014_about_feature_scaling.html)를 접하게되었습니다. **Normalization 또는 Standardization 개념에 익숙하지 않은 경우, 5분정도를 들여 이 블로그를 읽기를 권합니다.**
 
-[여기](https://www.youtube.com/watch?v=Xjtu1L7RwVM&list=PLoRl3Ht4JOcdU872GhiYWf6jwrk_SNhz9&index=26) Gradient descendent method(신경 네트워크와 같은)를 사용하여 훈련 한 classifier를 처리 할 때 feature scaling의 필요성에 대한 Hinton의 훌륭한 설명이 있습니다.
+[여기](https://www.youtube.com/watch?v=Xjtu1L7RwVM&list=PLoRl3Ht4JOcdU872GhiYWf6jwrk_SNhz9&index=26) Gradient descent method(신경 네트워크와 같은)를 사용하여 훈련 한 classifier를 처리 할 때 feature scaling의 필요성에 대한 Hinton의 훌륭한 설명이 있습니다.
 
 *Ok, we grabbed some math, that's it? Not quite.*
 
@@ -108,11 +108,13 @@ Sklearn의 Normalizer 클래스는 샘플을 단위 표준에 개별적으로 �
 - 모든 결과는 train 세트의 10-fold 무작위 교차 검증에 대한 정확도 점수입니다.
 - 여기서 test 세트에 대한 결과는 논의하지 않습니다. 일반적으로 테스트 세트는 숨겨져 있어야하며 분류기들의 결과는 오직 교차검증 점수로 정합니다.
 - 중첩된 교차 검증을 수행했습니다. 매개변수 튜닝을 위한 5-fold 내부 교차 검증과 최상의 매개 변수를 사용하여 모델의 스코어를 얻기위한 10-fold 외부 교차검증을 시행했습니다. 또한 이 부분에서는 모든 데이터는 Train fold 세트에서만 가져옵니다.
-* A picture is worth a thousand words :*
+* A picture is worth a thousand words :
 
-<center>
-	![https://sebastianraschka.com/faq/docs/evaluate-a-model.html](https://www.kdnuggets.com/wp-content/uploads/cross-validation.png)
-</center>
+
+![](https://www.kdnuggets.com/wp-content/uploads/cross-validation.png)
+
+[https://sebastianraschka.com/faq/docs/evaluate-a-model.html](https://sebastianraschka.com/faq/docs/evaluate-a-model.html)
+
 
 #### Let's read the results file
 ```python
@@ -199,8 +201,8 @@ Best classifier from each model:
 ### Let's analyze the results
 1. 모두를 다룰 수 있는 단일 scaling 방법은 없습니다.
 2. Scaling으로 결과가 개선되었음을 알 수 있습니다. SVM, MLP, KNN 및 NB는 서로 다른 scaling 방법으로 크게 향상되었습니다.
-3. NB, RF, LDA, CART는 일부 scaling 방법의 영향을받지 않습니다. 이것은 물론 각 분류기의 작동 방식과 관련이 있습니다. 분할 기준은 먼저 각 feature의 값을 정렬 한 다음 분할의 지니/엔트로피를 계산하기 때문에 Tree는 scaling의 영향을 받지 않습니다. 일부 scaling 방법은 이 순서를 유지하므로 정확도 점수는 변하지 않습니다.
-NB는 모델의 선수가 실제 값이 아닌 각 클래스의 개수로 결정되기 때문에 영향을받지 않습니다. LDA는 클래스 간의 변동을 사용하여 상관 계수를 확인하므로 scaling하는 것이 중요하지 않습니다. (check [this)](https://www.youtube.com/watch?v=azXCzI57Yfc)
+3. NB, RF, LDA, CART는 일부 scaling 방법의 영향을 받지 않습니다. 이것은 물론 각 분류기의 작동 방식과 관련이 있습니다. 분할 기준은 먼저 각 feature의 값을 정렬 한 다음 분할의 지니/엔트로피를 계산하기 때문에 Tree는 scaling의 영향을 받지 않습니다. 일부 scaling 방법은 이 순서를 유지하므로 정확도 점수는 변하지 않습니다.
+NB는 모델의 선수가 실제 값이 아닌 각 클래스의 개수로 결정되기 때문에 영향을 받지 않습니다. LDA는 클래스 간의 변동을 사용하여 상관 계수를 확인하므로 scaling하는 것이 중요하지 않습니다. (check [this)](https://www.youtube.com/watch?v=azXCzI57Yfc)
 - QuantileTransformer-Uniform과 같은 일부 scaling 방법은 각 feature value의 정확한 순서를 유지하지 않으므로, 다른 scaling 방법에서 특정 분류기가 영향을 받지 않았던 것에 반해 위의 분류기에서도 점수가 변경됩니다.
 
 
@@ -263,10 +265,9 @@ Let's check that!
 
 더 나은 이해와 더 일반적인 결론을 도출하려면 더 많은 데이터 세트를 실험해야합니다.
 
-다양한 특성을 가진 여러 데이터 세트에 섹션 3과 같은 Classifier + Scaling + PCA를 적용하고 결과를 분석합니다. 모든 데이터 세트는 Kaggel에서 가져 왔습니다.
+다양한 특성을 가진 여러 데이터 세트에 섹션 3과 같은 Classifier + Scaling + PCA를 적용하고 결과를 분석합니다. 모든 데이터 세트는 Kaggle에서 가져 왔습니다.
 
-* 편의상 각 데이터 세트의 숫자 열만 선택했습니다.  
- 다 변수 데이터 세트 (숫자 및 범주 형 기능)에서 feature scaling하는 방법에 대한 지속적인 논의가 있습니다.
+* 편의상 각 데이터 세트의 숫자 열만 선택했습니다. 다변수 데이터 세트 (숫자 및 범주 형 기능)에서 feature scaling하는 방법에 대한 지속적인 논의가 있습니다.
 * 분류기의 hyperparameters는 default 입니다.
 
 ### 5.1 Rain in Australia dataset
@@ -326,7 +327,7 @@ yes 4640
 
 * 이 데이터 세트에서 feautres의 scale이 다른 경우에도 PCA를 사용할 때 scale 조정한다고 해서 항상 결과가 향상되는 것은 아닙니다. 그러나 각 PCA 칼럼에서 2 번째로 좋은 점수는 가장 좋은 점수에 가깝습니다. 이것은 PCA의 components를 조정하고 scaling한다면 scaling하지 않는 것보다 결과를 개선할 수 있음을 나타냅니다.
 * 다시 한번 강조할 것은 특출난 단일 scaling 방법이 없다는 것 입니다.
-* 또 다른 흥미로운 결과는, 대부분의 모델에서 모든 scaling 방법이 그다지 영향을 미치지 않는다는 것입니다 (일반적으로 1 % -3 % 개선).  
+* 또 다른 흥미로운 결과는, 대부분의 모델에서 모든 scaling 방법이 그다지 영향을 미치지 않는다는 것입니다(일반적으로 1% ~ 3% 개선).  
  이것은 불균형한 데이터 세트이며, 매개 변수를 조정하지 않았음을 기억해야 합니다.  
  또 다른 이유는 AUC 점수가 이미 90 % 이상으로 높기 때문에 큰 개선을 보기가 더 어렵기 때문입니다.
 
@@ -359,12 +360,12 @@ QSO 850
 * scaling으로 결과가 크게 향상되었음을 알 수 있습니다. 다양한 feature scale 때문이라고 볼 수 있습니다.
 
 * 우리는 PCA를 사용할 때 RobustScaler가 거의 항상 승리한다는 것을 알 수 있습니다.  
-이 데이터 세트에서 PCA 고유 벡터를 이동시키는 많은 이상 값 때문일 수 있습니다.  
-반면에, 우리가 PCA를 사용하지 않을 때 그러한 이상 치는 영향을 미치지 않습니다.  
-이를 확인하기 위해 데이터 탐색을해야합니다.
+이 데이터 세트에서 PCA 고유 벡터를 이동시키는 많은 이상값 때문일 수 있습니다.
+반면에, 우리가 PCA를 사용하지 않을 때 그러한 이상치는 영향을 미치지 않습니다.
+이를 확인하기 위해 데이터 탐색을 해야합니다.
 
 * StandardScaler와 다른 scaling 방법을 비교하면 정확도가 **최대 5%** 차이가 납니다.  
- 따라서 여러 가지 scaling 기법을 사용하여 실험해야하는 또 다른 지표입니다.
+ 따라서 여러 가지 scaling 기법을 사용하여 실험해야 하는 또 다른 지표입니다.
 
 * PCA는 거의 항상 scaling으로 이익을 얻습니다.
 
