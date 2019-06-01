@@ -205,20 +205,33 @@ WMT’14 English-to-French 데이터 세트에서 BLEU 점수가 38.95였고, WM
 
 #### 참고
 [[1] Neural Machine Translation by Jointly Learning to Align and Translate (Bahdanau et. al, 2015)](https://arxiv.org/abs/1409.0473)
+
 [[2] Effective Approaches to Attention-based Neural Machine Translation (Luong et. al, 2015)](https://arxiv.org/abs/1508.04025)
+
 [[3] Attention Is All You Need (Vaswani et. al, 2017)](https://arxiv.org/abs/1706.03762)
+
 [[4] Self-Attention GAN (Zhang et. al, 2018)](https://arxiv.org/abs/1805.08318)
+
 [[5] Sequence to Sequence Learning with Neural Networks (Sutskever et. al, 2014)](https://arxiv.org/abs/1409.3215)
+
 [[6] TensorFlow’s seq2seq Tutorial with Attention (Tutorial on seq2seq+attention)](https://github.com/tensorflow/nmt)
-[[7] Lilian Weng’s Blog on Attention (Great start to attention)](https://lilianweng.github.io/lil-log/2018/06/24/attention-attention.html#a-family-of-attention-mechanisms)
+
+[[7] Lilian Weng’s Blog on Attention (Great start to attention)](https://lilianweng.github.io/lil-log/2018/06/24/attention-
+attention.html#a-family-of-attention-mechanisms)
+
 [[8] Jay Alammar’s Blog on Seq2Seq with Attention (Great illustrations and worked example on seq2seq+attention)](https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/)
+
 [[9] Google’s Neural Machine Translation System: Bridging the Gap between Human and Machine Translation (Wu et. al, 2016)](https://arxiv.org/abs/1609.08144)
 
 #### 연관된 딥러닝 기사
 [Animated RNN, LSTM and GRU](https://towardsdatascience.com/animated-rnn-lstm-and-gru-ef124d06cf45)
+
 [Line-by-Line Word2Vec Implementation (on word embeddings)](https://towardsdatascience.com/an-implementation-guide-to-word2vec-using-numpy-and-google-sheets-13445eebd281)
+
 [Step-by-Step Tutorial on Linear Regression with Stochastic Gradient Descent](https://towardsdatascience.com/step-by-step-tutorial-on-linear-regression-with-stochastic-gradient-descent-1d35b088a843)
+
 [10 Gradient Descent Optimisation Algorithms + Cheat Sheet](https://towardsdatascience.com/10-gradient-descent-optimisation-algorithms-86989510b5e9)
+
 [Counting No. of Parameters in Deep Learning Models](https://towardsdatascience.com/counting-no-of-parameters-in-deep-learning-models-by-hand-8f1716241889)
 
 *Derek, William Tjhi, Yu Xuan, Ren Jie, Chris, Serene에게 이 기사에 대한 아이디어, 제안 및 수정을 해주셔서 감사드립니다.*
