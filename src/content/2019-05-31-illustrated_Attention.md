@@ -5,7 +5,7 @@ image: img/choco9966/attention.png
 author: choco9966
 date: "2019-05-31T15:46:37.121Z"
 tags:
-  - FeatureSelection
+  - NLP
 ---
 
 원문 아티클 : [Attn: Illustrated Attention](https://towardsdatascience.com/attn-illustrated-attention-5ec4ad276ee3?fbclid=IwAR1_qP1GVFUaFkWOWZNgwIJ__Z9rNP55glOqPec1faEq_GLYAgYSOGhhIvE)
