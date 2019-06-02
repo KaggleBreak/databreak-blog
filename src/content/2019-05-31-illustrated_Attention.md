@@ -10,6 +10,8 @@ tags:
 
 원문 아티클 : [Attn: Illustrated Attention](https://towardsdatascience.com/attn-illustrated-attention-5ec4ad276ee3?fbclid=IwAR1_qP1GVFUaFkWOWZNgwIJ__Z9rNP55glOqPec1faEq_GLYAgYSOGhhIvE)
 
+아래의 글은 TowardDataScience에 올라온 Raimi bin Karim의 Attn: Illustrated Attention을 번역한 글입니다. 원문 저자의 허락을 받고 번역한 것임을 미리 알려드립니다.  
+
 ## Attn: Illustrated Attention
 GIFs를 활용한 기계번역(ex. 구글번역기)에서의 Attention
 
