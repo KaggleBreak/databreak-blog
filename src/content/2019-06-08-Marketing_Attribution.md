@@ -330,7 +330,7 @@ plt.show()
 
 [Marketing Channel Attribution with Markov Chains in Python](https://medium.com/@mortenhegewald/marketing-channel-attribution-using-markov-chains-101-in-python-78fb181ebf1e) by Morten Hegewald
 
-[구글애널리틱스 기여 모델](http://analyticsmarketing.co.kr/digital-analytics/google-analytics/1680/)
+[구글애널리틱스 기여 모델](http://analyticsmarketing.co.kr/digital-analytics/google-analytics/1680/)(이 아티클에서 다루어진 내용 외의 블로그 내용을 여기에서 참고하세요.)
 
  
 
