@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Marketing Channel Attribution with Markov Chains in Python (Korean)"
-image: img/kaylee123/DigitalMarketing.png
+image: img/kaylee123/DigitalMarketing.jpeg
 author: kaylee123
 date: "2019-06-08T19:46:37.121Z"
 tags: 
