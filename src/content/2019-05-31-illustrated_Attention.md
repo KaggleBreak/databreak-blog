@@ -25,13 +25,13 @@ seq2seq의 아이디어는 인코더(encoder)와 디코더(decoder)라는 2개�
 
 ![](https://cdn-images-1.medium.com/max/800/1*erEV0fHM233twhYPhw3gvg.png "Fig. 0.2: seq2seq with an input sequence of length 64")
 
-seq2seq의 문제는 디코더가 인코더로부터 수신하는 정보가 인코더의 마지막 hidden state 값이며(그림0.1의 두 개의 빨간색 노드), 이는 input 값을 요약한 고정 된 벡터입니다. 그림0.2처럼 보다 긴 input 값이 들어오면, 인코더는 그림0.1과 같은 길이의 고정 된 벡터로 input 값을 요약합니다. 하지만 input 값의 차이가 큼에도 요약한 벡터의 길이가 같은 것은 이상합니다. 이것은 극단적인 망각으로 이어질 수 있습니다. 이 단락에는 100단어가 있습니다. 이 단락을 네가 아는 다른 언어로 바로 번역할 수 있습니까?
+seq2seq의 문제는 디코더가 인코더로부터 수신하는 정보가 인코더의 마지막 hidden state 값이며(첫번째 그림의 두 개의 빨간색 노드), 이는 input 값을 요약한 고정 된 벡터입니다. 위의 그림처럼 보다 긴 input 값이 들어오면, 인코더는 맨  그림과 같은 길이의 고정 된 벡터로 input 값을 요약합니다. 하지만 input 값의 차이가 큼에도 요약한 벡터의 길이가 같은 것은 이상합니다. 이것은 극단적인 망각으로 이어질 수 있습니다. 이 단락에는 100단어가 있습니다. 이 단락을 네가 아는 다른 언어로 바로 번역할 수 있습니까?
 
 만약 우리가 할 수 없다면, 우리는 디코더에도 시키면 안 됩니다. input 값을 하나의 벡터로 표현하는 대신에, 인코더의 시각에 따른 벡터표현을 디코더에 제공하여 더 나은 번역을 할 수 있을까요? 이것이 Attention으로 가는 시작입니다. 
 
 ![](https://cdn-images-1.medium.com/max/800/1*xCQbNIXsHxaEU0MZXDlAHQ.png "Fig 0.3: Adding an attention as an interface between encoder and decoder. Here, the first decoder time step is getting ready to receive information from encoder before giving the first translated word.")
 
-attention은 seq2seq의 발전된 모델로, 모든 인코더의 hidden state 값을 디코더에 제공합니다(그림 0.3의 빨간색 hidden state 값은 제외). 이 설정을 사용하면, 모델은 입력된 문장의 유용한 부분에 집중하는 것이 가능하므로 모델 간의 얼라인먼트(alignment)을 학습할 수 있습니다. 이것은 긴 입력 문장에 효과적으로 대처하는 데 도움이 됩니다. [9].
+attention은 seq2seq의 발전된 모델로, 모든 인코더의 hidden state 값을 디코더에 제공합니다(위 그림의 빨간색 hidden state 값은 제외). 이 설정을 사용하면, 모델은 입력된 문장의 유용한 부분에 집중하는 것이 가능하므로 모델 간의 얼라인먼트(alignment)을 학습할 수 있습니다. 이것은 긴 입력 문장에 효과적으로 대처하는 데 도움이 됩니다. [9].
 
 > 정의: 얼라인먼트(alignment)
 얼라인먼트란 원본 텍스트의 단어를 번역의 해당 단어와 일치시키는 것을 의미합니다. 설명은 [링크](https://www.andovar.com/alignment-of-translation)에서 가져왔습니다. 
@@ -197,7 +197,7 @@ WMT’14 English-to-French 데이터 세트에서 BLEU 점수가 38.95였고, WM
 - seq2seq with 2-stacked encoder + attention
 - GNMT — seq2seq with 8-stacked encoder (+bidirection+residual connections) + attention
 
-이게 다야! 다음 저서에서는 self attention의 개념과 이것이 Google의 Transformer 및 Self-Attention Generative Adversarial Network (SAGAN)에서 어떻게 사용되었는지에 대해 알아볼 것입니다. 이 공간을 주시하십시오!
+다음 저서에서는 self attention의 개념과 이것이 Google의 Transformer 및 Self-Attention Generative Adversarial Network (SAGAN)에서 어떻게 사용되었는지에 대해 알아볼 것입니다. 
 
 ### 부록 : 점수함수
 아래는 Lilian Weng이 모은 점수 함수 중 일부입니다. Additive/concat 및 dot product가 이 기사에서 언급되었습니다. 내적 연산 (내적, 코사인 유사성 등)과 관련된 점수 함수의 기본 개념은 두 벡터 간의 유사성을 측정하는 것입니다. feed-forward neural network 스코어 함수의 경우, 아이디어는 모델이 변환과 함께 정렬 가중치를 학습하도록 하는 것입니다.
