@@ -65,17 +65,39 @@ tags:
 
 이 방식에서는 구매로 이어지는 여정 동안에 사용자가 터치한 모든 마케팅 채널에 균등하게 기여가 분할 됩니다.
 
-이 방법은 소비자 행동에서 볼 수 있는 다중 채널 터치 동작의 추세를 파악하는데 더 적합합니다. 그러나 서로 다른  채널을 구별하지 않으며 마케팅 노력에 대해모든 소비자의 
+이 방법은 소비자 행동에서 볼 수 있는 다중 채널 터치 동작의 추세를 파악하는데 더 적합합니다. 그러나 채널들 간의 차이를 구별하지 않으며 모든 소비자가 마케팅 노력들에 대해 동등하게 참여하지 않기 때문에 이 모델은 분명한 단점이 있습니다.
+
+다른 표준 기여 방법들을 언급하자면 Time Decay Attribution과 Position Based Attribution이 있습니다(참고자료의 구글애널리틱스 기여모델을 참고하세요)
 
 
-## 고급 기여 모델 : 마코프 체인(Makov Chain)
+## 진보된 기여 모델 : 마코프 체인(Makov Chain)
+
+ 위의 세가지 기여 모델들을 통해 마케팅 채널의 ROI를 파악하기 쉬운 모델을 구현할 수 있습니다.
+
+ 그러나 이러한 3가지 모델들에 대해 주의할점은 지나치게 단순화되어 있다는 점입니다. 이 것은 마케팅 채널로 부터 발생된 결과(전환 or 수익)에 대한 과신을 야기할 수 있습니다. 이러한 불찰은 미래의 비즈니스/마케팅 결정들을 해로운 방향으로 잘못 이끌 수 있습니다.
+
+ 이 불찰을 극복하기 위해 우리는 보다 진보된 기여 모델인 마코프 체인을 고려할 수 있습니다.
+
+ 통계 과정을 수강했다면 이 이론을 접했을 수 있습니다. 마코프 체인은 러시아의 수학자인 마르코프의 이름을 따서 지어졌으며 각 사건의 확률이 이전 사건에 얻어진 상태에만 의존하는 일련의 가능한 사건들을 말합니다.
+
+ 채널 기여의 맥락에서 마코프 체인은 사용자의 여정을 모델링하는 프레임워크(마코프 체인의 상태 전이도)와 사용자들이 최종구매가 일어날 때까지 각각 한 채널에서 또다른 채널로 이동하게 되는 지수(마코프 체인의 상태 전이 확률)를 제공합니다.
+
+ 우리는 이 기사에서 마코프 체인의 이론을 깊이 있게 들어가지 않을 것입니다. (배경지식에 필요한 수학/통계를 깊이 알고 싶다면 [Setosa.io](Setosa.io)를 잘 읽어보세요.)
 
  ![](https://cdn-images-1.medium.com/max/1200/0*YSXOetB1r7L9D9oI)
 
+ 마코프 체인의 핵심 개념은 생성된 데이터를 한 채널에서 네트웍 상의 또 다른 잠재적인 마케팅 채널로 이동할 확률 식별하는데 사용할 수 있다는 것입니다.
+
+ 다음 섹션에서 이러한 기여 프레임워크를 실행하기 위한 파이썬 코드를 살펴보도록 하겠습니다.
+
 ## 파이썬으로 네가지 기여모델을 만드는 방법
+ *따라하기를 원한다면 이 예제에서 사용할 데이터 셋을 [여기](https://www.dropbox.com/s/wi907ms4h4cl1p0/Channel_attribution.csv?dl=0)에서 다운로드할 수 있습니다.*
+
+ 이 데이터 셋은 (마케팅 채널의) 참여 활동이 열로 행은 참여 채널로 시간 순서대로 구성되었습니다. 만약 한 유저가 n번째 마케팅 채널에 참여했다면 각각의 마케팅 채널은 n번째 보이는 고정된 값에 할당됩니다. 채널 21은 전환이며 데이터 셋에서 사용자의 여정이 전환된 결과만을 포함하게 됩니다.
 
  ![](https://cdn-images-1.medium.com/max/2400/1*6hruZFvBVnIPx7xVB361Zg.png)
 
+우리가 할 첫번째 일은 필요한 라이브러리들을 불러오는 것입니다.
 
 ```
 import pandas as pd
@@ -83,6 +105,8 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import subprocess
 ```
+
+다음에는 데이터 셋을 로드하고 정리합니다.
 
 ```
 # Load in our data
@@ -97,6 +121,7 @@ for col in cols:
     df[col] = df[col].map(lambda x: str(x)[:-2] if '.' in x else str(x))
 ```
 
+마코프 체인 프레임워크는 단일 변수와 채널1 > 채널2> 채널3 > ... 형태로의 사용자 여정을 원하기 때문에 아래와 같이 다음 루프를 정확하게 생성합니다.
 
 ```
 # Create a total path variable
@@ -107,6 +132,16 @@ for i in df.index:
         df.at[i, 'Path'] = df.at[i, 'Path'] + df.at[i, x] + ' > '
 ```
 
+데이터 셋의 채널 21은 전환 사건이므로 경로에서 해당 채널을 분리하고 발생하는 전환 수를 별도의 전환 변수로 만듭니다(사용자의 여정 레벌 데이터가 1개일때만)
+
+```
+# Split path on conversion (channel 21)
+df['Path'] = df['Path'].map(lambda x: x.split(' > 21')[0])
+
+# Create conversion value we can sum to get total conversions for each path
+df['Conversion'] = 1
+```
+이제 초기 데이터 작업은 완료되었습니다. 데이터에는 여전희 원래의 모든 열들이 포함되어 있으므로 앞으로 필요한 하위집합(subset)만 가져오도록 합니다. 일부 사용자들은 동일한 여정을 했으므로 고유한 사용자의 여정으로 데이터를 그룹화하고 전환 변수에서는 각 여행에 대한 전환 수가 저장됩니다.
 
 ```
 # Select relevant columns
@@ -119,6 +154,12 @@ df = df.groupby('Path').sum().reset_index()
 df.to_csv('Paths.csv', index=False)
 The last line in the above piece of code will
 ```
+
+위의 코드의 마지막 줄은 데이토 조작을 완료한 데이터를  csv 파일로 출력합니다. 투명성 목적으로 이 데이터를 사용하는 것이 편리합니다. 우리의 경우에는 마코프 체인 기여 모델을 실행하기 위해 이 csv 파일을 사용할 것입니다.
+
+이를 수행하는 몇 가지 방법이 있습니다. 파이썬은 현재 이를 만들기 위한 라이브러리가 없기 때문에 실제로 파이썬에서 마코프 체인/네트워크를 스스로 구축하는 것이 좋습니다. 이렇게 하면 모델에 대한 개요를 볼 수 있지만 시간이 많이 소요되는 방법이기도 합니다. 우리는 보다 효율적으로 단일 어플리케이션으로써 마코프 체인에 집중된 이론을 가진 R 라이브러리인 ChannelAttribution을 사용하려고 합니다.
+
+표준 파이썬 라이브러리를 서브 프로세스를 사용하여 마코프 네트워크를 계산하는 다음과 같은 R 코드를 실행합니다.
 
 ```
 # Read in the necessary libraries
@@ -139,6 +180,8 @@ write.csv(M$result, file = "Markov - Output - Conversion values.csv", row.names=
 # Output the transition matrix as well, for visualization purposes
 write.csv(M$transition_matrix, file = "Markov - Output - Transition matrix.csv", row.names=FALSE)
 ```
+
+다음의 파이썬 코드는 R 스크립티를 실행하고 csv 파일로 결과를 로드합니다.
 
 ```
 # Define the path to the R script that will run the Markov Model
