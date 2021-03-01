@@ -52,7 +52,7 @@
     "polished": "2.3.3",
     "postcss-color-function": "4.0.1",
     "prism-themes": "1.0.1",
-    "prismjs": "1.15.0",
+    "prismjs": "1.23.0",
     "react": "16.8.1",
     "react-dom": "16.8.1",
     "react-emotion": "10.0.0",
